@@ -7,7 +7,7 @@ from rapidfuzz import process, fuzz
 app = FastAPI()
 
 # --- 1. Memuat data referensi dari Singkatan.xlsx ---
-df_institutions = pd.read_excel('Singkatan.xlsx')
+df_institutions = pd.read_csv('Train_data.csv')
 
 # Membuat dictionary singkatan -> nama lengkap
 institution_mapping = {
