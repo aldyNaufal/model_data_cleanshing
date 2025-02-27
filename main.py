@@ -21,10 +21,8 @@ official_names = list({row['Nama'].strip().upper()
                        for _, row in df_institutions.iterrows()
                        if pd.notna(row['Nama']) and row['Nama'].strip() != ''})
 
-
 def is_abbreviation(word, mapping):
     return word.strip().upper() in mapping
-
 
 def replace_abbreviation(text, mapping):
     words = text.split()
@@ -33,14 +31,12 @@ def replace_abbreviation(text, mapping):
             words[i] = mapping[word]  # Ganti singkatan dengan nama lengkap
     return " ".join(words)
 
-
 def clean_after_institution(text):
     pattern = r"(UNIVERSITAS|INSTITUT|POLITEKNIK|SEKOLAH TINGGI) [A-Z ]+"
     match = re.search(pattern, text)
     if match:
         return match.group(0)  # Hanya ambil nama institusi
     return text  # Jika tidak ada yang cocok, tetap gunakan teks asli
-
 
 def clean_text(text, mapping, official_names, fuzzy_threshold=85):
     text = text.upper().strip()
@@ -81,16 +77,20 @@ def clean_text(text, mapping, official_names, fuzzy_threshold=85):
     text = ' '.join(text.split())
     return text
 
-
+# Model input baru sesuai format yang diinginkan
 class InputData(BaseModel):
-    name: str
+    PERSON_NBR: str
+    ADDR_NBR: str
+    ADDR_STREET: str
+    CITY_CODE: str
+    STATE_CODE: str
+    PERSON_NAME: str
 
-
+# Endpoint yang hanya mengembalikan hasil clean dari PERSON_NAME
 @app.post("/clean/")
 async def clean_name(data: InputData):
-    cleaned_name = clean_text(data.name, institution_mapping, official_names)
+    cleaned_name = clean_text(data.PERSON_NAME, institution_mapping, official_names)
     return {"cleaned": cleaned_name}
-
 
 if __name__ == "__main__":
     import uvicorn
