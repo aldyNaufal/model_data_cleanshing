@@ -33,7 +33,7 @@ Sebelum memulai, pastikan Anda telah menginstal:
    ```
    Jika tidak ada file `requirements.txt`, Anda bisa menginstal paket secara manual:
    ```sh
-   pip install fastapi uvicorn pandas openpyxl rapidfuzz
+   pip install fastapi uvicorn pandas rapidfuzz
    ```
 
 ## Struktur File
@@ -71,7 +71,12 @@ Ganti `x.x.x.x` dengan alamat IP dari mesin host. Pastikan juga:
 - **Request Body:**
   ```json
   {
-    "name": "ITB (Institut Teknologi Bandung)"
+    "PERSON_NBR": "123456",
+    "ADDR_NBR": "7890",
+    "ADDR_STREET": "Jl. Sudirman",
+    "CITY_CODE": "JKT",
+    "STATE_CODE": "ID",
+    "PERSON_NAME": "ITB (Institut Teknologi Bandung)"
   }
   ```
 - **Response:**
@@ -99,3 +104,4 @@ Ganti `x.x.x.x` dengan alamat IP dari mesin host. Pastikan juga:
 
 ## Lisensi
 Proyek ini berada di bawah lisensi MIT. Silakan gunakan dan modifikasi sesuai kebutuhan Anda.
+
