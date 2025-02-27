@@ -24,7 +24,7 @@ Sebelum memulai, pastikan Anda telah menginstal:
    ```sh
    python -m venv venv
    source venv/bin/activate  # Untuk Linux/Mac
-   venv\Scripts\activate  # Untuk Windows
+   venv\Scripts\activate     # Untuk Windows
    ```
 
 3. **Install Dependensi**
@@ -46,14 +46,24 @@ project-directory/
 ```
 
 ## Menjalankan Aplikasi
-1. Jalankan perintah berikut di terminal:
-   ```sh
-   uvicorn main:app --reload
-   ```
-2. API akan berjalan di `http://127.0.0.1:8000`
-3. Dokumentasi otomatis FastAPI dapat diakses di:
-   - Swagger UI: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
-   - Redoc: [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)
+### Untuk Pengembangan Lokal
+Gunakan perintah berikut untuk menjalankan aplikasi dengan auto-reload (berguna saat pengembangan):
+```sh
+uvicorn main:app --reload
+```
+Aplikasi akan berjalan di `http://127.0.0.1:8000`  
+Dokumentasi API dapat diakses di:
+- Swagger UI: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+- Redoc: [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)
+
+### Untuk Mengakses dari Host Lain (Remote)
+Jika Anda ingin menjalankan API agar dapat diakses dari perangkat lain, gunakan perintah:
+```sh
+uvicorn main:app --host x.x.x.x --port 8000
+```
+Ganti `x.x.x.x` dengan alamat IP dari mesin host. Pastikan juga:
+- Firewall atau aturan jaringan tidak memblokir port 8000.
+- Jika berada di balik NAT atau router, lakukan port forwarding sesuai kebutuhan.
 
 ## Cara Menggunakan API
 ### Endpoint: `/clean/`
@@ -89,7 +99,3 @@ project-directory/
 
 ## Lisensi
 Proyek ini berada di bawah lisensi MIT. Silakan gunakan dan modifikasi sesuai kebutuhan Anda.
-
----
-Happy coding! 🚀
-
